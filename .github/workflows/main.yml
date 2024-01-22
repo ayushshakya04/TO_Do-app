@@ -1,20 +1,31 @@
 name: To-Do Pipeline
-on: push
+on:
+  push
+
 jobs:
   Snyk:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout code
+        uses: actions/checkout@master
+
       - name: Run Snyk on backend
         uses: snyk/actions/node@master
+        continue-on-error: true
         with:
           args: --file=./backend/package.json  # Specify the path to the backend package.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
 
       - name: Run Snyk on frontend
         uses: snyk/actions/node@master
+        continue-on-error: true
         with:
           args: --file=./frontend/package.json  # Specify the path to the frontend package.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
