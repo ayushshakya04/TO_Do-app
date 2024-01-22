@@ -15,15 +15,17 @@ jobs:
         continue-on-error: true
         with:
           args: --file=./backend/package.json  # Specify the path to the backend package.json
+          command: monitor
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          command: monitor
+          #command: monitor
 
       - name: Run Snyk on frontend
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
           args: --file=./frontend/package.json  # Specify the path to the frontend package.json
+          command: monitor
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          command: monitor
+          #command: monitor
