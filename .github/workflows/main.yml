@@ -17,7 +17,6 @@ jobs:
           args: --file=./backend/package.json  # Specify the path to the backend package.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
           command: monitor
 
       - name: Run Snyk on frontend
@@ -27,5 +26,4 @@ jobs:
           args: --file=./frontend/package.json  # Specify the path to the frontend package.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
           command: monitor
