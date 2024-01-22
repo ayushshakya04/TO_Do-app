@@ -5,7 +5,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
+      - name: Run Snyk on backend
         uses: snyk/actions/node@master
+        with:
+          args: --file=./backend/package.json  # Specify the path to the backend package.json
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Snyk on frontend
+        uses: snyk/actions/node@master
+        with:
+          args: --file=./frontend/package.json  # Specify the path to the frontend package.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
