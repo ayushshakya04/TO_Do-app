@@ -29,7 +29,6 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
   SonarQube:
-    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
