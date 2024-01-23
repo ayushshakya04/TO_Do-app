@@ -42,10 +42,22 @@ jobs:
 
     - name: Install dependencies
       run: |
+        args: --file=./backend/package.json
         npm install
+        
+    - name: Install dependencies
+      run: |
+        args: --file=./frontend/package.json
+        npm install
+        
+    - name: Build
+      run: |
+        args: --file=./backend/package.json
+        npm run build
 
     - name: Build
       run: |
+        args: --file=./frontend/package.json
         npm run build
 
     - name: SonarQube Scan
