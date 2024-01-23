@@ -3,27 +3,38 @@ on:
   push
 
 jobs:
-  Snyk:
-    runs-on: ubuntu-latest
+  # Snyk:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@master
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@master
 
-      - name: Run Snyk on backend
-        uses: snyk/actions/node@master
-        continue-on-error: true
+  #     - name: Run Snyk on backend
+  #       uses: snyk/actions/node@master
+  #       continue-on-error: true
+  #       with:
+  #         args: --file=./backend/package.json  # Specify the path to the backend package.json
+  #         command: monitor
+  #       env:
+  #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  #     - name: Run Snyk on frontend
+  #       uses: snyk/actions/node@master
+  #       continue-on-error: true
+  #       with:
+  #         args: --file=./frontend/package.json  # Specify the path to the frontend package.json
+  #         command: monitor
+  #       env:
+  #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  SonarQube:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
         with:
-          args: --file=./backend/package.json  # Specify the path to the backend package.json
-          command: monitor
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: sonarsource/sonarqube-scan-action@master
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Run Snyk on frontend
-        uses: snyk/actions/node@master
-        continue-on-error: true
-        with:
-          args: --file=./frontend/package.json  # Specify the path to the frontend package.json
-          command: monitor
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
