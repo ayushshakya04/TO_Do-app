@@ -107,6 +107,6 @@ jobs:
           node-version: '14'
           args: --file=./backend/package.json
       - name: Install Jest Package
-        run: npm i jest
+        run: npm install --save-dev jest
       - name: Run Unit Tests
         run: npm test
