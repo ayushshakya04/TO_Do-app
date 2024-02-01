@@ -67,7 +67,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-          working-directory: backend
+          args: --file=./backend/package.json
       - name: Build Backend with npm
         run: |
           npm install
@@ -78,7 +78,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-          working-directory: frontend
+          args: --file=./frontend/package.json
       - name: Build Frontend with npm
         run: |
           npm install
