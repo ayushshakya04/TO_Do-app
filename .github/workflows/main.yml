@@ -116,7 +116,7 @@ jobs:
       - name: Install Jest Package (Backend)
         working-directory: backend
         run: |
-          # npm i jest
+         npm i jest
       - name: Run Backend Unit Tests
         working-directory: backend
         run: npm test
