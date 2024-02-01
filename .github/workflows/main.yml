@@ -103,8 +103,6 @@ jobs:
         with:
           node-version: '14'
           run: npm install
-      - name: Display NPM Debug Log
-        run: cat /home/runner/.npm/_logs/2024-02-01T10_31_23_410Z-debug.log
 
       # - name: Cache frontend node modules
       #   uses: actions/cache@v2
