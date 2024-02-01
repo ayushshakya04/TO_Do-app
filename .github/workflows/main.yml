@@ -1,6 +1,6 @@
 name: To-Do Pipeline
 on:
-  push
+  workflow_dispatch
 
 jobs:
   # Snyk:
