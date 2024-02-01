@@ -117,7 +117,8 @@ jobs:
         working-directory: backend
         run: |
           npm i jest
-          
+      - name: Display NPM Debug Log
+        run: cat /home/runner/.npm/_logs/2024-02-01T10_31_23_410Z-debug.log
       - name: Run Backend Unit Tests
         working-directory: backend
         run: npm test
