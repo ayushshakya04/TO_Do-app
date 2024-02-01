@@ -103,14 +103,14 @@ jobs:
           node-version: '14'
           run: npm install
 
-      - name: Cache frontend node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            frontend/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+      # - name: Cache frontend node modules
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       frontend/node_modules
+      #     key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-npm-
 
       - name: Install Jest Package (Backend)
         working-directory: backend
