@@ -105,7 +105,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-          args: --file=./backend/package.json
+          run: cd backend
       - name: Install Jest Package
         run: npm i jest
       - name: Run Unit Tests
