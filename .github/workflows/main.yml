@@ -105,11 +105,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-          run: cd backend
       - name: Install Jest Package
         run: npm i jest
       - name: Run Unit Tests
-        run: |
-          run: |
-            cd backend
-            npm test
+        run: npm test
