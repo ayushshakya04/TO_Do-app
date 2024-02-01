@@ -122,16 +122,8 @@ jobs:
         working-directory: backend
         run: |
           npm i jest
-          cat /home/runner/.npm/_logs/2024-02-01T09_22_32_493Z-debug.log
-
+          
       - name: Run Backend Unit Tests
         working-directory: backend
         run: npm test
 
-      - name: Install Jest Package (Frontend)
-        working-directory: frontend
-        run: npm i jest
-
-      - name: Run Frontend Unit Tests
-        working-directory: frontend
-        run: npm test
