@@ -57,29 +57,16 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            backend/node_modules
-            frontend/node_modules
+            node_modules
           key: ${{ runner.os }}-npm-${{ hashFiles('**/*.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
         
-      - name: Install Node.js and npm (Backend)
+      - name: Install Node.js and npm
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-          args: --file=./backend/package.json
       - name: Build Backend with npm
-        run: |
-          npm install
-          pwd
-          ls
-
-      - name: Install Node.js and npm (Frontend)
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          args: --file=./frontend/package.json
-      - name: Build Frontend with npm
         run: |
           npm install
           pwd
