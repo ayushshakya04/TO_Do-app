@@ -48,51 +48,88 @@ jobs:
 
   Build:
     runs-on: ubuntu-latest
-    # needs: ["SonarQube"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache node modules
+      - name: Cache backend node modules
         uses: actions/cache@v2
         with:
           path: |
-            node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/*.json') }}
+            backend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
-        
-      - name: Install Node.js and npm
+
+      - name: Install Node.js and npm (Backend)
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: Build Backend with npm
-        run: |
-          npm install
-          pwd
-          ls
+          run: npm install
+
+      - name: Cache frontend node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            frontend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install Node.js and npm (Frontend)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          run: npm install
 
   Testing:
     runs-on: ubuntu-latest
-    # needs: ["Build"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache node modules
+      - name: Cache backend node modules
         uses: actions/cache@v2
         with:
           path: |
-            node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/*.json') }}
+            backend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('backend/**/*.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
-        
-      - name: Install Node.js and npm
+
+      - name: Install Node.js and npm (Backend)
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: Install Jest Package
+          run: npm install
+
+      - name: Cache frontend node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            frontend/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('frontend/**/*.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+        
+      - name: Install Node.js and npm (Frontend)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          run: npm install
+
+      - name: Install Jest Package (Backend)
+        working-directory: backend
         run: npm i jest
-      - name: Run Unit Tests
+
+      - name: Run Backend Unit Tests
+        working-directory: backend
+        run: npm test
+
+      - name: Install Jest Package (Frontend)
+        working-directory: frontend
+        run: npm i jest
+
+      - name: Run Frontend Unit Tests
+        working-directory: frontend
         run: npm test
